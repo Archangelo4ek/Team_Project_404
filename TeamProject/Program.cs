@@ -6,17 +6,25 @@ int ncolumn = int.Parse(Console.ReadLine());
 
 Person[] mas1 = new Person[nrow * ncolumn];
 Person[,] mas2 = new Person[nrow, ncolumn];
+Person[][] mas3 = new Person[nrow][];
 
 for (int i = 0; i < mas1.Length; i++)
 {
     mas1[i] = new Person();
 }
-
 for (int i = 0; i < nrow; i++)
 {
     for (int j = 0; j < ncolumn; j++)
     {
         mas2[i, j] = new Person();
+    }
+}
+for (int i = 0; i < nrow; i++)
+{
+    mas3[i] = new Person[ncolumn];
+    for (int j = 0; j < ncolumn; j++)
+    {
+        mas3[i][j] = new Person();
     }
 }
 
@@ -26,7 +34,7 @@ for (int i = 0; i < mas1.Length; i++)
     mas1[i].BirthYear = 2025;
 }
 int end = Environment.TickCount;
-int oneDimTime = end - start;
+int mas1Time = end - start;
 
 start = Environment.TickCount;
 for (int i = 0; i < nrow; i++)
@@ -37,8 +45,19 @@ for (int i = 0; i < nrow; i++)
     }
 }
 end = Environment.TickCount;
-int twoDimRectTime = end - start;
+int mas2Time = end - start;
+start = Environment.TickCount;
+for (int i = 0; i < nrow; i++)
+{
+    for (int j = 0; j < ncolumn; j++)
+    {
+        mas3[i][j].BirthYear = 2025;
+    }
+}
+end = Environment.TickCount;
+int mas3Time = end - start;
 
-Console.WriteLine("Количество строк " + nrow + " Количество столбцов " + ncolumn);
-Console.WriteLine("Время выполнения операций mas1 " + oneDimTime + " мс");
-Console.WriteLine("Время выполнения операций mas2 " + twoDimRectTime + " мс");
+Console.WriteLine("кол-во строк " + nrow + " кол-во столбцов " + ncolumn);
+Console.WriteLine("время выполнения mas1 - одномерный " + mas1Time + " мс");
+Console.WriteLine("время выполнения mas2 - двумерный прямоугольный " + mas2Time + " мс");
+Console.WriteLine("время выполнения mas3 - двумерный ступенчатый " + mas3Time + " мс");
